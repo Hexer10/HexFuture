@@ -3,7 +3,9 @@ with new features
 
 Commands:
 "sm_future" "Allow you to do a cmd in the future"
+
 "sm_futurelist" "See all the running futures"
+
 "sm_futurekill" "Kill a running future"
 
 
