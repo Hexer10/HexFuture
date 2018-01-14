@@ -62,7 +62,7 @@ public void OnPluginStart()
 //Command
 public Action Cmd_Future(int client, int args)
 {
-	if (args < 4) //Check for sufficend args
+	if (args < 4)
 	{
 		CReplyToCommand(client, "%s Usage: sm_future <interval> <repeats | 0 = infinite> <command>", PREFIX);
 		return Plugin_Handled;
@@ -72,7 +72,7 @@ public Action Cmd_Future(int client, int args)
 	float fInter = GetCmdArgFloat(1);
 	int iRep = GetCmdArgInt(2);
 	
-	if (RoundToCeil(fInter) <= 0) //Check for interval lenght
+	if (RoundToCeil(fInter) <= 0) //Check for interval length
 	{
 		CReplyToCommand(client, "%s The Interval must be greater than {blue}0", PREFIX);
 		return Plugin_Handled;
@@ -80,7 +80,7 @@ public Action Cmd_Future(int client, int args)
 	
 	char sCommand[256];
 	
-	for (int i = 3; i <= args; i++) //Loop the args the get only the cmd, so not needed the " "
+	for (int i = 3; i <= args; i++) //Loop the args to get only the cmd, so not needed the " "
 	{
 		char sArg[64];
 		GetCmdArg(i, sArg, sizeof(sArg));
@@ -134,7 +134,7 @@ public Action Cmd_FutureKill(int client, int args)
 	
 	int iIndex = GetCmdArgInt(1); //Get args
 	
-	if ((iIndex > GetArraySize(hFutureArray)) || iIndex < 0) //Check for valid ID
+	if ((iIndex > hFutureArray.Length) || iIndex < 0 || !hFutureArray.Length) //Check for valid ID
 	{
 		CReplyToCommand(client, "Invalid Future ID");
 		return Plugin_Handled;
@@ -165,7 +165,7 @@ public Action Cmd_FutureList(int client, int args)
 	}
 	char sCmd[256];
 	
-	if (GetArraySize(hFutureArray) == 0) //Check for almost one future running
+	if (!hFutureArray) //Check if at least one future is running
 	{
 		CReplyToCommand(client, "%s No Future found", PREFIX);
 		return Plugin_Handled;
@@ -183,7 +183,7 @@ public Action Cmd_FutureList(int client, int args)
 //Timer
 public Action Timer_Future(Handle timer, DataPack Datapack)
 {
-	Datapack.Reset(); //Reset pack pos
+	Datapack.Reset();
 	
 	char sCommand[256];
 	
